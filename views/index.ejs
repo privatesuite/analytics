@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<%- include(partial("head")) %>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+
+</head>
+<body>
+	
+	<div class="app">
+		
+		<%- include(partial("menu")) %>
+		
+		<div class="section main_section">
+
+			<h1>Analytics</h1>
+		
+			<canvas id="chart"></canvas>
+
+		</div>
+
+	</div>
+
+	<script>
+
+		function colorFromString (str) {
+
+			var hash = 0;
+			for (var i = 0; i < str.length; i++) {
+
+				hash = str.charCodeAt(i) + ((hash << 5) - hash);
+
+			}
+
+			var color = "#";
+
+			for (var i = 0; i < 3; i++) {
+
+				var value = (hash >> (i * 8)) & 0xFF;
+				color += ("00" + value.toString(16)).substr(-2);
+
+			}
+
+			return color;
+
+		}
+	
+		const ctx = document.getElementById("chart").getContext("2d");
+		var myPieChart = new Chart(ctx, {
+			
+			type: 'pie',
+			data: {
+				
+				datasets: [{
+
+					data: [<%- db.getViewsForAllPages().join(", ") %>],
+					backgroundColor: [<%- db.getPages().map(_ => `"${_}"`).join(", ") %>].map(_ => colorFromString(_))
+
+				}],
+				
+				labels: [<%- db.getPages().map(_ => `"${_}"`).join(", ") %>]
+
+			},
+
+			options: {
+
+				legend: {
+
+					display: false
+
+				},
+
+				onClick (_, el) {
+
+					if (!el.length) return;
+
+					console.log(el[0]._model.label);
+
+				} 
+
+				// tooltips: {
+				
+				// 	callbacks: {
+				
+				// 		label () {}
+				
+				// 	}
+				
+				// },
+
+			}
+		
+		});
+
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+
+	"name": "analytics",
+	"displayName": "Analytics",
+	"authors": ["aurame"],
+	"href": "plugins/analytics",
+
+	"main": "index.js"
+
+}
