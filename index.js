@@ -41,7 +41,7 @@ async function locate (ip) {
 
 	contenu.routes.www.after((req, res) => {
 
-		res.on("close", async () => {
+		res.on("finish", async () => {
 
 			console.log("Hello");
 
