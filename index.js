@@ -41,9 +41,9 @@ async function locate (ip) {
 
 	contenu.routes.www.after((req, res) => {
 
-		console.log("Hello");
-
 		res.on("close", async () => {
+
+			console.log("Hello");
 
 			if (res.statusCode === 200 || res.statusCode === 304) {
 
