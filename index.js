@@ -43,6 +43,8 @@ async function locate (ip) {
 
 		res.on("close", async () => {
 			
+			console.log("Hello");
+
 			if (res.statusCode === 200 || res.statusCode === 304) {
 
 				const ip = req.connection.remoteAddress.replace("::ffff:", "");
