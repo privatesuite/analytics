@@ -10,7 +10,17 @@ async function locate (ip) {
 
 		return {}
 
-	} else return await iplocation(ip);
+	} else {
+
+		const l = await iplocation(ip)
+
+		delete l.latitude;
+		delete l.longitude;
+		delete l.ip;
+
+		return l;
+
+	}
 
 }
 
