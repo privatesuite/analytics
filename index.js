@@ -2,7 +2,7 @@ const db = require("./db");
 const path = require("path");
 const mime = require("mime");
 const contenu = require("contenu");
-const iplocation = require("iplocation");
+const iplocation = require("iplocation").default;
 
 async function locate (ip) {
 
