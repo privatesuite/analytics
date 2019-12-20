@@ -8,12 +8,7 @@ async function locate (ip) {
 
 	if (ip === "::1") {
 
-		return {
-
-			city: "Unknown",
-			country: "Unknown"
-
-		}
+		return {}
 
 	} else return await iplocation(ip);
 
