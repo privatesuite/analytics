@@ -114,7 +114,7 @@ module.exports = {
 
 		const f = {};
 
-		for (const _ of this.getHits().filter(_ => _.contentType === "text/html")) f[_.origin.country || "Unknown"] = (f[_.origin.country || "Unknown"] || 0) + 1;
+		for (const _ of this.getHits().filter(_ => _.contentType === "text/html")) f[_.origin.country_name || "Unknown"] = (f[_.origin.country_name || "Unknown"] || 0) + 1;
 
 		return f;
 
