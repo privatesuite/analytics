@@ -13,6 +13,7 @@ async function locate (ip) {
 	} else {
 
 		const l = await iplocation(ip)
+		console.log(l);
 
 		delete l.latitude;
 		delete l.longitude;
@@ -72,7 +73,7 @@ function partial (_) {
 				// console.log(ip, location, req.get("Referrer"), req.path);
 				// console.log(req.path, res.getHeaders());
 
-				console.log("A");
+				// console.log("A");
 
 				db.addHit({
 					
