@@ -12,6 +12,9 @@ async function locate (ip) {
 
 	} else {
 
+		iplocation(ip).catch(e => {
+			console.log(e);
+		})
 		const l = await iplocation(ip)
 		console.log(l);
 
