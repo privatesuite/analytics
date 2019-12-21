@@ -24,23 +24,39 @@ async function locate (ip) {
 
 }
 
+function partial (_) {
+
+	return path.join(__dirname, "..", "..", "views", "partials", _);
+
+}
+
 (async () => {
 
 	await db.init();
 	
 	contenu.routes.admin.get("/plugins/analytics", (req, res) => {
 
-		res.render(path.join(__dirname, "views", "index.ejs"), {
+		if (req.query.path) {
 
-			partial (_) {
+			res.render(path.join(__dirname, "views", "path.ejs"), {
 
-				return path.join(__dirname, "..", "..", "views", "partials", _);
+				partial,
+				path: req.query.path,
+				db
 
-			},
+			});
 
-			db
+		} else {
 
-		});
+			res.render(path.join(__dirname, "views", "index.ejs"), {
+
+				partial,
+
+				db
+
+			});
+
+		}
 
 	});
 

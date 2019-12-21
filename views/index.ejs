@@ -28,11 +28,11 @@
 
 						<% for (const page of pages.sort((a, b) => db.getViewsForPath(b) - db.getViewsForPath(a))) { %>
 
-							<div>
+							<a href="?path=<%- page %>" style="text-decoration: none;">
 
 								<h3><%- page %> <code style="float: right;"><%- db.getViewsForPath(page) %></code></h3>
 
-							</div>
+							</a>
 
 						<% } %>
 
@@ -46,7 +46,7 @@
 
 					<div class="list">
 
-						<% const co = db.getCountriesObject(); %>
+						<% const co = db.getCountriesObjectForAllPages(); %>
 						
 						<% for (const country of Object.keys(co).sort((a, b) => co[b] - co[a])) { %>
 

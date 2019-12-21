@@ -110,11 +110,21 @@ module.exports = {
 
 	// Countries
 
-	getCountriesObject () {
+	getCountriesObjectForPath (page) {
 
 		const f = {};
 
-		for (const _ of this.getHits().filter(_ => _.contentType === "text/html")) f[_.origin.country || "Unknown"] = (f[_.origin.country || "Unknown"] || 0) + 1;
+		for (const hit of this.getHitsForPath(page)) f[hit.origin.country || "Unknown"] = (f[hit.origin.country || "Unknown"] || 0) + 1;
+
+		return f;
+
+	},
+
+	getCountriesObjectForAllPages () {
+
+		const f = {};
+
+		for (const hit of this.getHits().filter(_ => _.contentType === "text/html")) f[hit.origin.country || "Unknown"] = (f[hit.origin.country || "Unknown"] || 0) + 1;
 
 		return f;
 
