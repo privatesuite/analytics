@@ -1,7 +1,7 @@
 const path = require("path");
 const Streamlet = require("streamletdb");
 
-const db = new Streamlet(path.join(__dirname, "database"));
+const db = new Streamlet(path.join(__dirname, "..", "database"));
 
 module.exports = {
 
@@ -75,6 +75,7 @@ module.exports = {
 		return [...s];
 
 	},
+
 	getViewsForAllPages () {
 
 		return this.getPages().map(_ => this.getViewsForPath(_));
@@ -104,6 +105,18 @@ module.exports = {
 			views: m_
 
 		}
+
+	},
+
+	// Countries
+
+	getCountriesObject () {
+
+		const f = {};
+
+		for (const _ of this.getHits().filter(_ => _.contentType === "text/html")) f[_.origin.country || "Unknown"] = (f[_.origin.country || "Unknown"] || 0) + 1;
+
+		return f;
 
 	}
 

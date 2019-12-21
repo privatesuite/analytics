@@ -3,7 +3,7 @@
 <head>
 	
 	<%- include(partial("head")) %>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script> -->
 
 </head>
 <body>
@@ -16,13 +16,59 @@
 
 			<h1>Analytics</h1>
 		
-			<canvas id="chart"></canvas>
+			<div class="split half_split">
+
+				<div>
+
+					<h2>Pages</h2>
+
+					<div class="list">
+
+						<% const pages = db.getPages() %>
+
+						<% for (const page of pages.sort((a, b) => db.getViewsForPath(b) - db.getViewsForPath(a))) { %>
+
+							<div>
+
+								<h3><%- page %> <code style="float: right;"><%- db.getViewsForPath(page) %></code></h3>
+
+							</div>
+
+						<% } %>
+
+					</div>
+
+				</div>
+
+				<div>
+
+					<h2>Countries</h2>
+
+					<div class="list">
+
+						<% const co = db.getCountriesObject(); %>
+						
+						<% for (const country of Object.keys(co).sort((a, b) => co[b] - co[a])) { %>
+
+							<div>
+
+								<h3><%- country %> <code style="float: right;"><%- co[country] %></code></h3>
+
+							</div>
+
+						<% } %>
+
+					</div>
+
+				</div>
+
+			</div>
 
 		</div>
 
 	</div>
 
-	<script>
+	<!-- <script>
 
 		function colorFromString (str) {
 
@@ -93,7 +139,7 @@
 		
 		});
 
-	</script>
+	</script> -->
 	
 </body>
 </html>
