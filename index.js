@@ -72,6 +72,8 @@ function partial (_) {
 				// console.log(ip, location, req.get("Referrer"), req.path);
 				// console.log(req.path, res.getHeaders());
 
+				console.log("A");
+
 				db.addHit({
 					
 					path: req.path,
